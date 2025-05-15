@@ -1,0 +1,5 @@
+1;Coca Cola;4.5;8
+2;Pepsi;3.0;4
+3;MountainDew;5.2;3
+4;Mirinda;2.9;0
+5;Monster Energy 0.5l;7.2;6
