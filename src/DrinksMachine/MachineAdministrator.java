@@ -42,7 +42,7 @@ public class MachineAdministrator {
                             editProduct();
                             break;
                             case "5":
-                                MachineBalance.displayBalance();
+                                viewBalance();
                                 break;
                                 case "0":
                                     status = true;
@@ -303,7 +303,10 @@ public class MachineAdministrator {
 
     }
 
-
+    //OPCJA 5 STATUS KONTA
+    static void viewBalance() {
+        MachineBalance.displayBalance();
+    }
 }
 
 
