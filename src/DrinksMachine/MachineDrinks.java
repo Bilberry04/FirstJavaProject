@@ -17,7 +17,7 @@ public class MachineDrinks {
         System.out.printf("[%d] %s - %.2f$ (avaiable: %d)%n", drinkID, drinkName, drinkPrice, drinkQuantity);
     }
 
-    public int getdrinkId() {
+    public int getdrinkID() {
         return drinkID;
     }
 
@@ -25,7 +25,7 @@ public class MachineDrinks {
         return drinkQuantity;
     }
 
-    public void setdrinkQuantity(int drinkQuantity) {
+    public void setdrinkQuantity( int drinkQuantity) {
         this.drinkQuantity = drinkQuantity;
     }
 
@@ -33,7 +33,11 @@ public class MachineDrinks {
         return drinkName;
     }
 
-    public double getdrinkPrice() {
-        return drinkPrice;
-    }
+    public void setName(String newProductName) {this.drinkName = newProductName; }
+
+    public double getdrinkPrice() { return drinkPrice; }
+
+    public void setPrice(double newPrice) { this.drinkPrice = newPrice; }
+
+    public String toFileString() { return drinkID + ";" + drinkName + ";" + drinkPrice + ";" + drinkQuantity; }
 }

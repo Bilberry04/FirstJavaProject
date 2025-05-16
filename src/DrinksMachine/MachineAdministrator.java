@@ -1,5 +1,7 @@
 package DrinksMachine;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -37,6 +39,7 @@ public class MachineAdministrator {
                         deleteProduct();
                         break;
                         case "4":
+                            editProduct();
                             break;
                             case "5":
                                 break;
@@ -127,8 +130,8 @@ public class MachineAdministrator {
 
         //TWORZENIE NOWEGO ID DLA PRODUKTU
         for (MachineDrinks drink : drinks) {
-            if (drink.getdrinkId() > maxId) {
-                maxId = drink.getdrinkId();
+            if (drink.getdrinkID() > maxId) {
+                maxId = drink.getdrinkID();
             }
         }
         int newProductId = maxId + 1;
@@ -145,7 +148,7 @@ public class MachineAdministrator {
         //ZAPISANIE OBIEKTU W PLIKU TXT
         PrintWriter writer = new PrintWriter("src/DrinksMachine/MachineDrinks.txt");
         for (MachineDrinks d : drinks) {
-            writer.println(d.getdrinkId() + ";" + d.getdrinkName() + ";" + d.getdrinkPrice() + ";" + d.getdrinkQuantity());
+            writer.println(d.getdrinkID() + ";" + d.getdrinkName() + ";" + d.getdrinkPrice() + ";" + d.getdrinkQuantity());
         }
         writer.close();
 
@@ -171,7 +174,7 @@ public class MachineAdministrator {
 
         //SZUKANIE PRODUKTU O PODANYM ID I ZAPISANIE JEGO DANYCH
         for (MachineDrinks drink : drinks) {
-                if (drink.getdrinkId() == deleteID) {
+                if (drink.getdrinkID() == deleteID) {
                     drink.display();
                     productName = drink.getdrinkName();
                     productPrice = drink.getdrinkPrice();
@@ -183,11 +186,11 @@ public class MachineAdministrator {
         String decision = input.nextLine();
 
         if (decision.equals("yes")) {
-            drinks.removeIf(drink -> drink.getdrinkId() == deleteID); //FUNKCJA USUWAJACA KONKRETNY PRODUKT Z LISTY
+            drinks.removeIf(drink -> drink.getdrinkID() == deleteID); //FUNKCJA USUWAJACA KONKRETNY PRODUKT Z LISTY
 
             PrintWriter writer = new PrintWriter("src/DrinksMachine/MachineDrinks.txt"); //NADPISANIE PLIKU TXT PO USUNIECIU PRODUKTU Z LISTY
             for (MachineDrinks d : drinks) {
-                writer.println(d.getdrinkId() + ";" + d.getdrinkName() + ";" + d.getdrinkPrice() + ";" + d.getdrinkQuantity());
+                writer.println(d.getdrinkID() + ";" + d.getdrinkName() + ";" + d.getdrinkPrice() + ";" + d.getdrinkQuantity());
             }
             writer.close();
 
@@ -198,6 +201,108 @@ public class MachineAdministrator {
         }
 
     }
+
+    //OPCJA 4 EDYTOWANIE
+    static void editProduct() throws IOException {
+
+        List<MachineDrinks> drinks = DrinkLoader.loadDrinks("src/DrinksMachine/MachineDrinks.txt");
+        MachineDrinks selectedDrink = null;
+
+        while (selectedDrink == null) {
+
+        System.out.println("\nPodaj ID produktu do edycji: ");
+        int id;
+        try {
+            id = Integer.parseInt(input.nextLine());
+        } catch(NumberFormatException e) {
+            System.out.println("Invalid format ID");
+            return;
+        }
+
+            for (MachineDrinks drink : drinks) {
+                if (drink.getdrinkID() == id) {
+                    selectedDrink = drink;
+                    break;
+                }
+            }
+
+            if (selectedDrink == null) {
+                System.out.println("Product with this ID does not exist. Try again!");
+            }
+        }
+
+                    boolean editing = true;
+
+                    while (editing) {
+                        selectedDrink.display();
+                        System.out.println("\n[1] Name\n[2] Price\n[3] Quantity\n[0] Quit and save\n[9] Quit without saving");
+                        System.out.println("\nWhat do you want to edit?");
+                        System.out.print(">> ");
+                        String choice = input.nextLine();
+
+                        switch (choice) {
+
+                            case "1":
+                                System.out.print("New product name: ");
+                                String newProductName = input.nextLine();
+                                selectedDrink.setName(newProductName);
+                                System.out.println("You changed product name on: " + newProductName);
+                                break;
+
+                            case "2":
+                                System.out.print("New product price: ");
+                                try {
+                                    double newProductPrice = Double.parseDouble(input.nextLine());
+                                    selectedDrink.setPrice(newProductPrice);
+                                    System.out.println("You changed product price on: " + newProductPrice);
+                                } catch (NumberFormatException e) {
+                                    System.out.println("Invalid format price");
+                                }
+                                break;
+
+                            case "3":
+                                System.out.print("New product quantity: ");
+                                try {
+                                    int newProductQuantity = Integer.parseInt(input.nextLine());
+                                    selectedDrink.setdrinkQuantity(newProductQuantity);
+                                    System.out.println("You changed product quantity on: " + newProductQuantity);
+                                } catch (NumberFormatException e) {
+                                    System.out.println("Invalid format quantity");
+                                }
+                                break;
+
+                            case "0":
+
+                                try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/DrinksMachine/MachineDrinks.txt"))) {
+                                    for (MachineDrinks drink : drinks) {
+                                        writer.write(drink.toFileString());
+                                        writer.newLine();
+                                    }
+                                    System.out.println("Product updated successfully.");
+                                } catch (IOException e) {
+                                    System.out.println("Error writing to file: " + e.getMessage());
+                                }
+
+                                System.out.println("Exiting edit mode.");
+                                MachineAdministrator.AdministratorMenu();
+                                editing = false;
+                                break;
+
+                            case "9":
+                                System.out.println("Exiting edit mode without saving.");
+                                MachineAdministrator.AdministratorMenu();
+                                editing = false;
+                                break;
+
+                            default:
+                                System.out.println("\nInvalid choice. Try again! ");
+                        }
+
+                    }
+
+    }
+
+
 }
 
 

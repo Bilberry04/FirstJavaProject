@@ -49,7 +49,7 @@ public class MachineUser {
         int idChoice = Integer.parseInt(input.nextLine()); //ZAMIANA ZE STRINGA NA LICZBĘ CAŁKOWITĄ
         boolean found = false;
         for (MachineDrinks drink : drinks) {
-            if (drink.getdrinkId() == idChoice) {
+            if (drink.getdrinkID() == idChoice) {
                 found = true;
                 if (drink.getdrinkQuantity() > 0) { //SPRAWDZAMY DOSTEPNOSC PRODUKTU
                     drink.setdrinkQuantity(drink.getdrinkQuantity()-1); //SYMULACJA ZAKUPU 1 SZTUKI
@@ -58,7 +58,7 @@ public class MachineUser {
                     //NADPISANIE PLIKU TXT Z NOWA ILOSCIA
                     PrintWriter writer = new PrintWriter("src/DrinksMachine/MachineDrinks.txt");
                     for (MachineDrinks d : drinks) {
-                        writer.println(d.getdrinkId() + ";" + d.getdrinkName() + ";" + d.getdrinkPrice()+ ";" + d.getdrinkQuantity());
+                        writer.println(d.getdrinkID() + ";" + d.getdrinkName() + ";" + d.getdrinkPrice()+ ";" + d.getdrinkQuantity());
                     }
 
                     writer.close();
