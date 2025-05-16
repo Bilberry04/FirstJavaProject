@@ -61,6 +61,7 @@ public class MachineUser {
                         writer.println(d.getdrinkID() + ";" + d.getdrinkName() + ";" + d.getdrinkPrice()+ ";" + d.getdrinkQuantity());
                     }
 
+                    MachineBalance.topUpMachine(drink.drinkPrice);
                     writer.close();
                     System.out.println("Returning to buy menu...");
                     userChoiceB1();

@@ -42,6 +42,7 @@ public class MachineAdministrator {
                             editProduct();
                             break;
                             case "5":
+                                MachineBalance.displayBalance();
                                 break;
                                 case "0":
                                     status = true;
