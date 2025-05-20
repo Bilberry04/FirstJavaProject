@@ -115,7 +115,7 @@ public class MachineAdministrator {
                         checking = false;
                         break;
             }
-                      AdministratorMenu();
+                      checkProductsList();
         }
     }
 

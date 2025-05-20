@@ -1,0 +1,13 @@
+<<<<<<<<<<< Formatter >>>>>>>>>>>
+----------------------------------------------
+<---[ FORMATS WITH TERMINAL #Formatter ] --->
+1. InputFormatter - all formats about input
+2. TextFormatter - all formats about output
+----------------------------------------------
+
+
+<<<<<<<<<<< DrinksMachine >>>>>>>>>>>
+----------------------------------------------
+<---[ FORMATS WITH TERMINAL #MachineCommands] --->
+1. Starting programme with begining options (User/Administrator)
+----------------------------------------------

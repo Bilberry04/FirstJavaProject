@@ -1,7 +1,11 @@
 package DrinksMachine;
 
 import java.io.IOException;
+import java.util.Formatter;
 import java.util.Scanner;
+import Formatter.TextFormatter;
+import Formatter.InputFormatter;
+import org.w3c.dom.Text;
 
 // [mainMenuChoice] START MACHINE --> CHOOSE YOUR OPTIONS
 public class MachineCommands {
@@ -10,14 +14,17 @@ public class MachineCommands {
     static boolean running = true;
 
     public static void mainMenuChoice() throws IOException {
-        System.out.println("Hello!");
+        System.out.println(TextFormatter.header("Hello!") + TextFormatter.RESET);
         while (running) {
-            System.out.println("Enter command: ");
-            System.out.println("[1] User");
-            System.out.println("[2] Administrator");
-            System.out.println("[0] Exit");
 
-            String choice = input.nextLine();
+                        String menu =
+                            TextFormatter.BLUE + "Enter command:" + TextFormatter.RESET + "\n" +
+                            TextFormatter.GREEN + "[1] User" + TextFormatter.RESET + "\n" +
+                            TextFormatter.GREEN + "[2] Administrator" + TextFormatter.RESET + "\n" +
+                            TextFormatter.GREEN + "[0] Exit" + TextFormatter.RESET;
+            System.out.println(TextFormatter.boxed(menu));
+
+            String choice = InputFormatter.promptAndClear("Choose");
             switch (choice) {
                 case "1":
                     MachineUser.userChoiceB1();
