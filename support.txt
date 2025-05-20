@@ -11,3 +11,12 @@
 <---[ FORMATS WITH TERMINAL #MachineCommands] --->
 1. Starting programme with begining options (User/Administrator)
 ----------------------------------------------
+
+<<<<<<<<<<< Supporting codes >>>>>>>>>>>
+
+        String menu =
+                    TextFormatter.line() + TextFormatter.header("") + TextFormatter.line() + TextFormatter.RESET +
+                            TextFormatter.BLUE + "" + TextFormatter.RESET +
+                            TextFormatter.GREEN + "" + TextFormatter.RESET +
+
+                    System.out.println(TextFormatter.boxed(menu));

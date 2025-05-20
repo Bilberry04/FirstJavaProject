@@ -1,5 +1,8 @@
 package DrinksMachine;
 
+import Formatter.TextFormatter;
+import Formatter.InputFormatter;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -14,12 +17,14 @@ public class MachineUser {
         boolean inSubMenu = true;
         while (inSubMenu) {
 
-            System.out.println("Hello user!");
-            System.out.println("Enter command: ");
-            System.out.println("[1] Choose drink");
-            System.out.println("[0] Return to main menu");
+            String menu =
+                    TextFormatter.line() + TextFormatter.header("USER PANEL") + TextFormatter.line() + TextFormatter.RESET +
+                            TextFormatter.BLUE + "Hello user! Enter a command: \n" + TextFormatter.RESET +
+                            TextFormatter.GREEN + "[1] Choose a drink\n" + TextFormatter.RESET +
+                            TextFormatter.GREEN + "[0] Return to main menu" + TextFormatter.RESET;
+            System.out.println(TextFormatter.boxed(menu));
 
-            String choice = input.nextLine();
+            String choice = InputFormatter.promptAndClear("Choose");
             switch (choice) {
                 case "1":
                     MachineUser.drinkChoice();
